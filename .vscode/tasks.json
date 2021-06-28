@@ -4,13 +4,17 @@
 		{
 			"type": "shell",
 			"label": "Link",
-			"command": "gcc",
+			"command": "g++",
 			"args": [
 				"o/${workspaceFolderBasename}.o",
 				
-				"-static",
 				"-o",
 				"${workspaceFolderBasename}.exe",
+				"-lX11", 
+				"-lGL",
+				"-lpthread", 
+				"-lpng", 
+				//"-lstdc++f"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -30,19 +34,19 @@
 		{
 			"type": "shell",
 			"label": "Compile",
-			"command": "gcc",
+			"command": "g++",
 			"args": [
 				"-Isrc",
-
+				"-IGL",
 				"-c",
-				"src\\main.c",
+				"src/main.cpp",
 			
 				"-o",
-				"o\\${workspaceFolderBasename}.o",
+				"o/${workspaceFolderBasename}.o",
 
 				"-g",
-
-				"-Wall",
+				"-std=c++17"
+				//"-Wall",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -51,34 +55,8 @@
 				"$gcc"
 			],
 			"dependsOn": [
-				"Clear Console"
+				"Clear Console" 
 			]
-		},
-
-		{
-			"type": "shell",
-			"label": "Decode",
-			"command": "objdump",
-			"args": [
-				"-D",
-				
-				"${workspaceFolder}\\out\\${workspaceFolderBasename}.o",
-
-				">",
-				"objfiledmp.txt"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}\\out"
-			},
-			"problemMatcher": [
-				"$gcc"
-			]
-		}, 
-
-		{
-			"type": "shell",
-			"label": "Clear Console",
-			"command": "cls"
 		}
 	]
 }
