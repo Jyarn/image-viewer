@@ -1,37 +1,48 @@
 #define OLC_PGE_APPLICATION
 #include "olcPixelGameEngine.h"
+#include <iostream>
 
-class Example : public olc::PixelGameEngine
-{
-public:
-	Example()
-	{
-		sAppName = "Example";
+char* img;
+int iX = 1196;
+int iY = 1200;
+
+
+class t : public olc::PixelGameEngine {
+ public:
+	t() {
+		sAppName = "lol";
 	}
 
-public:
-	bool OnUserCreate() override
-	{
-		// Called once at the start, so create things here
+	bool OnUserCreate() override {
 		return true;
 	}
 
-	bool OnUserUpdate(float fElapsedTime) override
-	{
-		// called once per frame
-		for (int x = 0; x < ScreenWidth(); x++)
-			for (int y = 0; y < ScreenHeight(); y++)
-				Draw(x, y, olc::Pixel(rand() % 255, rand() % 255, rand()% 255));	
+	bool OnUserUpdate(float tme) override {
+		int s = 0;
+		for (int y = 0; y != iY; y++) {
+			for (int x = 0; x != iX; x++) {
+				Draw(x, y, olc::Pixel(img[s+1], img[s+2], img[s+3], img[s]));
+				s+=4;
+			}
+		}
 		return true;
 	}
 };
 
+int main() {;
+	std::ifstream fl;
+	fl.open("tst/mirror 1196x1200"); // file location
+	img = new char [4*iX*iY];
+	fl.seekg(fl.end);
+	int sz = fl.tellg();
+	fl.seekg(fl.beg);
 
-int main()
-{
-	Example demo;
-	if (demo.Construct(256, 240, 4, 4))
-		demo.Start();
-
-	return 0;
+	fl.read(img, iX*iY*4);
+	
+		
+	t t;
+	if (t.Construct(1900, 1200, 1900/iX, 1200/iY)) {
+		t.Start();
+	}
+	
 }

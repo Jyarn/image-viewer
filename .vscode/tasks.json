@@ -9,7 +9,7 @@
 				"o/${workspaceFolderBasename}.o",
 				
 				"-o",
-				"${workspaceFolderBasename}.exe",
+				"${workspaceFolderBasename}.AppImage",
 				"-lX11", 
 				"-lGL",
 				"-lpthread", 
