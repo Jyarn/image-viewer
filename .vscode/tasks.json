@@ -13,7 +13,7 @@
 				"-lX11", 
 				"-lGL",
 				"-lpthread", 
-				"-lpng", 
+				"-lpng",
 				//"-lstdc++f"
 			],
 			"options": {
@@ -45,7 +45,8 @@
 				"o/${workspaceFolderBasename}.o",
 
 				"-g",
-				"-std=c++17"
+				"-std=c++17",
+				"-static"
 				//"-Wall",
 			],
 			"options": {
